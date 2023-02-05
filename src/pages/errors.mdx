@@ -1,0 +1,68 @@
+export const description =
+  'In this guide, we will talk about what happens when something goes wrong while you work with the API.'
+
+# Errors
+
+Dans ce guide, nous allons parler de ce qui se passe lorsque quelque chose ne va pas pendant que vous travaillez avec l'API. Les erreurs sont possibles, et la plupart du temps, ce sont les vôtres, pas les nôtres. Examinons les codes d'état et les types d'erreur que vous pouvez rencontrer. {{ className: 'lead' }}
+
+Vous pouvez savoir si votre demande a abouti en vérifiant le code d'état lorsque vous recevez une réponse API. Si la réponse n'aboutit pas, vous pouvez utiliser le type d'erreur et le message d'erreur pour déterminer ce qui n'a pas fonctionné et effectuer un débogage rudimentaire (avant de contacter le support).
+
+<Note>
+  Avant de créer une issue sur le repo, sachez que 99% de toutes les erreurs signalées sont en faites des erreurs d'utilisateur.
+  Par conséquent, veuillez vérifier soigneusement votre code avant de créer une issue sur le repo de `Ruby`
+</Note>
+
+---
+
+## Status codes
+
+Voici une liste des différentes catégories de codes d'état renvoyés par l'API Ruby. Utilisez-les pour savoir si une requête a abouti.
+
+<Properties>
+  <Property name="2xx">
+    A 2xx status code indicates a successful response.
+  </Property>
+  <Property name="4xx">
+    A 4xx status code indicates a client error — this means it's a _you_
+    problem.
+  </Property>
+  <Property name="5xx">
+    A 5xx status code indicates a server error — you won't be seeing these.
+  </Property>
+</Properties>
+
+---
+
+## Error types
+
+<Row>
+  <Col>
+
+    Lorsqu'une demande n'aboutit pas, l'API Ruby renvoie une réponse d'erreur avec un type et un message d'erreur. Vous pouvez utiliser ces informations pour mieux comprendre ce qui n'a pas fonctionné et comment y remédier. La plupart des messages d'erreur sont plutôt utiles et exploitables.
+
+    Voici une liste des deux types d'erreur pris en charge par l'API de Ruby - utilisez-les pour comprendre ce que vous avez fait de mal.
+
+    <Properties>
+      <Property name="E_UNAUTHORIZED_ACCESS">
+        Vous devez vous connecter pour accéder à cette route.
+      </Property>
+      <Property name="E_AUTHORIZATION_FAILURE">
+        Accès refusé par le Policy : **permissions insuffisantes**
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col>
+
+    ```bash {{ title: "Error response" }}
+    {
+      "errors": [
+        {
+          "message": "E_UNAUTHORIZED_ACCESS: Accès refusé"
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>

@@ -1,0 +1,38 @@
+import { Guides } from '@/components/Guides'
+import { Resources } from '@/components/Resources'
+import { HeroPattern } from '@/components/HeroPattern'
+
+export const description =
+  'Apprenez tout ce qu\'il y a à savoir sur l\'API Ruby et intégrez Ruby dans votre produit.'
+
+export const sections = [
+  { title: 'Guides', id: 'guides' },
+  { title: 'Resources', id: 'resources' },
+]
+
+<HeroPattern />
+
+# API Documentation
+
+Utilisez l'API de Reforged pour accéder aux étiquettes, aux questions, aux utilisateurs et à bien d'autres choses encore, et intégrez de manière transparente votre questionnaire dans les flux de travail de dizaines d'utilisateurs de Reforged.
+
+<div className="not-prose mb-16 mt-6 flex gap-3">
+  <Button href="/etiquettes" arrow="right" children="Commencer" />
+</div>
+
+## Getting started {{ anchor: false }}
+
+Pour commencer, créez une nouvelle application, puis lisez comment effectuer des requêtes pour les ressources auxquelles vous devez accéder à l'aide de nos API HTTP. {{ className: 'lead' }}
+
+<div className="not-prose">
+  <Button
+    href="/authentication"
+    variant="text"
+    arrow="right"
+    children="Récupérer votre clef API"
+  />
+</div>
+
+<Guides />
+
+<Resources />

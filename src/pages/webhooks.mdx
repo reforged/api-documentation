@@ -1,0 +1,57 @@
+export const description =
+  'In this guide, we will look at how to register and consume webhooks to integrate your app with Protocol.'
+
+# Webhooks
+
+Dans ce guide, nous allons voir comment enregistrer et consommer des webhooks pour intégrer votre application à `Ruby`. Avec les webhooks, votre application peut savoir quand quelque chose se passe dans `Ruby`, par exemple quand un professeur lance un évènement ou ajoute une étiquette. {{ className : 'lead' }}
+
+## Consommation de webhooks
+
+Lorsque votre application reçoit une requête de type "webhook" de la part de `Ruby`, vérifiez l'attribut `type` pour voir quel événement en est à l'origine. La première partie du type d'événement vous indique le type de données utiles, par exemple une étiquette, une question, etc.
+
+```json {{ title: 'Example webhook payload' }}
+{
+  "id": "a056V7R7NmNRjl70",
+  "type": "question.updated",
+  "payload": {
+    "id": "WAz8eIbvDR60rouK"
+    // ...
+  }
+}
+```
+
+Dans l'exemple ci-dessus, une question a été `mise à jour`, et le type de données utiles est une `question`.
+
+<div className="not-prose">
+  <Button
+    href="#event-types"
+    variant="text"
+    arrow="right"
+    children="Voir tous les types d'événements"
+  />
+</div>
+
+---
+
+## Types d'événements
+
+<Row>
+  <Col>
+
+    <Properties>
+      <Property name="SOON">
+        En cours de développement
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```json {{ 'title': 'Example payload' }}
+    {
+      "SOON": "ça arrive fort!"
+    }
+    ```
+
+  </Col>
+</Row>

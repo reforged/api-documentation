@@ -1,0 +1,248 @@
+export const description =
+  'Sur cette page, nous allons nous plonger dans les différents points de terminaison des étiquettes que vous pouvez utiliser pour gérer les étiquettes de manière programmatique.'
+
+# Etiquettes
+
+Comme son nom l'indique, les étiquettes sont une partie essentielle de Ruby Sur cette page, nous allons nous plonger dans les différents points de terminaison des étiquettes que vous pouvez utiliser pour gérer les étiquettes de manière programmatique. Nous verrons comment interroger, créer, mettre à jour et supprimer des étiquettes.
+
+## Le modèle étiquette
+
+Le modèle d'une étiquette contient toutes les informations relatives aux étiquettes, telles que le nom de l'étiquette, et sa couleur. Il contient également une relation avec questions.
+
+### Properties
+
+<Properties>
+  <Property name="id" type="string">
+    Identifiant unique d'une étiquette.
+  </Property>
+  <Property name="label" type="string">
+    Label de l'étiquette.
+  </Property>
+  <Property name="color" type="string">
+    Couleur de l'étiquette.
+  </Property>
+  <Property name="created_at" type="timestamp">
+    Date de la création de l'étiquette.
+  </Property>
+  <Property name="updated_at" type="timestamp">
+    Date de la dernière modification de l'étiquette.
+  </Property>
+</Properties>
+
+---
+
+## Liste des étiquettes {{ tag: 'GET', label: '/v1/etiquettes' }}
+
+<Row>
+  <Col>
+
+    Ce point d'accès vous permet de récupérer une liste de toutes les étiquettes.
+
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/v1/etiquettes">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://api.reforged.fr/v1/etiquettes \
+      -H "Authorization: Bearer {token}" \
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "0f0ae355-0005-4de1-bf28-037d2bffc272",
+        "label": "Mathmétiques",
+        "color": "bg-red-200",
+        "created_at": "2023-01-26T15:58:19.712+01:00",
+        "updated_at": "2023-01-26T15:58:19.712+01:00"
+      },
+      {
+        "id": "042cba29-84e9-44ac-b232-d1521f3eca91",
+        "label": "Java",
+        "color": "bg-red-200",
+        "created_at": "2023-01-26T16:00:48.206+01:00",
+        "updated_at": "2023-01-26T16:00:48.206+01:00"
+      },
+      // ... and more
+    ]
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Créer une étiquette {{ tag: 'POST', label: '/v1/etiquettes/create' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet d'ajouter une nouvelle étiquette à votre liste d'étiquette dans Ruby. Pour ajouter une étiquette, vous devez fournir son label et sa couleur dans Ruby.
+
+    ### Attributs requis
+
+    <Properties>
+      <Property name="label" type="string">
+        La label de l'étiquette.
+      </Property>
+      <Property name="color" type="string">
+        La couleur de l'étiquette.
+      </Property>
+    </Properties>
+
+
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="POST" label="/v1/etiquettes/create">
+
+    ```bash {{ title: 'cURL' }}
+    curl https://api.reforged.fr/v1/etiquettes/create \
+      -H "Authorization: Bearer {token}" \
+      -d label="Typescript best langage ever" \
+      -d color="bg-red-200" \
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "label": "Typescript best langage ever",
+      "color": "bg-red-200",
+      "id": "e9773524-ac2a-409a-9517-ef3dd2ee9298",
+      "created_at": "2023-02-04T17:59:16.078+01:00",
+      "updated_at": "2023-02-04T17:59:16.078+01:00"
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Récupérer une étiquette {{ tag: 'GET', label: '/v1/etiquettes/:id' }}
+
+<Row>
+  <Col>
+    Ce point de terminaison vous permet de récupérer une étiquette en fournissant son identifiant. Consultez [la liste](#le-modele-etiquette) en haut de cette page pour voir quelles propriétés sont incluses dans les objets d'étiquettes.
+
+
+  </Col>
+
+
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/v1/etiquettes/0f0ae355-0005-4de1-bf28-037d2bffc272">
+
+    ```bash {{ title: 'cURL' }}
+    curl https://api.reforged.fr/v1/etiquettes/0f0ae355-0005-4de1-bf28-037d2bffc272 \
+      -H "Authorization: Bearer {token}"
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "0f0ae355-0005-4de1-bf28-037d2bffc272",
+      "label": "Typescript",
+      "color": "bg-red-200",
+      "created_at": "2023-01-26T15:58:19.712+01:00",
+      "updated_at": "2023-01-26T15:58:19.712+01:00",
+      "questions": []
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Modifier une étiquette {{ tag: 'PUT', label: '/v1/etiquettes/:id' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet d'effectuer une mise à jour sur une étiquette. Actuellement, les seules attributs qui peuvent être mis à jour sur les étiquettes sont les attributs `label` et `color`.
+
+    ### Optional attributes
+
+    <Properties>
+      <Property name="label" type="string">
+        Label de l'étiquette
+      </Property>
+      <Property name="color" type="string">
+        Couleur de l'étiquette
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="PUT" label="/v1/etiquettes/0f0ae355-0005-4de1-bf28-037d2bffc272">
+
+    ```bash {{ title: 'cURL' }}
+    curl -X PUT https://api.reforged.fr/v1/etiquettes/0f0ae355-0005-4de1-bf28-037d2bffc272 \
+      -H "Authorization: Bearer {token}" \
+      -d label="Typescript" \
+      -d color="bg-red-200"
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "message": "Etiquette modifiée",
+      "etiquette": {
+        "id": "0f0ae355-0005-4de1-bf28-037d2bffc272",
+        "label": "le Typescript est encore mieux",
+        "color": "bg-red-200",
+        "created_at": "2023-01-26T15:58:19.712+01:00",
+        "updated_at": "2023-02-05T12:37:17.442+01:00"
+      }
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Supprimer une étiquette {{ tag: 'DELETE', label: '/v1/etiquettes/:id' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet de supprimer des étiquettes de votre liste d'étiquettes dans le `Ruby`. Remarque : Cette opération supprimera également toutes les questions en relations avec l'étiquette.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="DELETE" label="/v1/etiquettes/0f0ae355-0005-4de1-bf28-037d2bffc272">
+
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE https://api.reforged.fr/v1/contacts/0f0ae355-0005-4de1-bf28-037d2bffc272 \
+      -H "Authorization: Bearer {token}"
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "message": "Etiquette supprimé",
+      "etiquette": {
+        "id": "0f0ae355-0005-4de1-bf28-037d2bffc272",
+        "label": "lkol,daz",
+        "color": "bg-red-200",
+        "created_at": "2023-01-26T15:58:19.712+01:00",
+        "updated_at": "2023-02-05T12:37:17.442+01:00"
+      }
+    }
+    ```
+
+  </Col>
+</Row>

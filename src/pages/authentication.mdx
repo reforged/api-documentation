@@ -1,0 +1,28 @@
+export const description =
+  'In this guide, we’ll look at how authentication works. Protocol offers two ways to authenticate your API requests: Basic authentication and OAuth2 with a token.'
+
+# Authentication
+
+Vous devrez authentifier vos requêtes pour accéder à l'un des points de terminaison de l'API Ruby. Dans ce guide, nous allons examiner le fonctionnement de l'authentification. Ruby propose deux méthodes pour authentifier vos demandes d'API : L'authentification de base et OAuth2 avec un jeton - OAuth2 est la méthode recommandée. {{ className: 'lead' }}
+
+## Basic authentication
+
+Avec l'authentification de base, vous utilisez votre nom d'utilisateur et votre mot de passe pour authentifier vos requêtes HTTP. À moins que vous n'ayez une très bonne raison, vous ne devriez probablement pas utiliser l'authentification de base. Voici comment s'authentifier en utilisant cURL :
+
+```bash {{ title: 'Example request with basic auth' }}
+curl https://api.reforged.fr/v1/etiquettes \
+  -u username:password
+```
+
+Ne jamais commit votre mot de passe pour `Ruby` sur GitHub!
+
+## Authentication with bearer token
+
+La méthode recommandée pour s'authentifier auprès de l'API Ruby est d'utiliser un jeton. Lors de l'établissement d'une connexion à l'aide d'un jeton, vous aurez besoin de votre jeton d'accès. Voici comment ajouter le jeton à l'en-tête de la requête en utilisant cURL :
+
+```bash {{ title: 'Example request with bearer token' }}
+curl https://api.reforged.fr/v1/etiquettes \
+  -H "Authorization: Bearer {token}"
+```
+
+

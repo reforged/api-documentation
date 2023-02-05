@@ -1,0 +1,375 @@
+export const description =
+  'Sur cette page, nous allons nous plonger dans les différents points de terminaison des questions que vous pouvez utiliser pour gérer les étiquettes de manière programmatique.'
+
+# Questions
+
+Les questions sont une partie essentielle de `Ruby` - elles sont les éléments principaux pour les utilisateurs. Sur cette page, nous allons nous plonger dans les différents points de terminaison des questions que vous pouvez utiliser pour gérer les questions de manière programmatique. Nous verrons comment interroger, créer, mettre à jour et supprimer des questions. {{ className: 'lead' }}
+
+## Le modèle question
+
+Le modèle de question contient toutes les informations relatives aux questions entre le créateur et les étiquettes. En outre, les questions peuvent également être reliés sur une séquence, elles peuvent avoir différentes types de réponses.
+
+### Properties
+
+<Properties>
+  <Property name="id" type="string">
+    Identifiant unique d'une question.
+  </Property>
+  <Property name="label" type="string">
+    Nom de la question.
+  </Property>
+  <Property name="slug" type="string">
+    Nom unique de la question.
+  </Property>
+  <Property name="enonce" type="string">
+    Enoncé de la question.
+  </Property>
+  <Property name="user_id" type="string">
+    Clef de référence sur l'utilisateur qui a créé la question.
+  </Property>
+  <Property name="created_at" type="timestamp">
+    Date de la création de la question.
+  </Property>
+  <Property name="updated_at" type="timestamp">
+    Date de la dernière modification de la question.
+  </Property>
+</Properties>
+
+---
+
+## Liste de toutes les questions {{ tag: 'GET', label: '/v1/questions' }}
+
+<Row>
+  <Col>
+
+    Ce point d'accès vous permet de récupérer une liste de toutes les questions. Par défaut, elles ne sont pas triées, mais elles peuvent l'être par une étiquette !
+
+    ### Optional attributes
+
+    <Properties>
+      <Property name="etiquette" type="string">
+        Visualiser les questions par étiquette
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/v1/questions">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://api.reforged.fr/v1/questions \
+      -H "Authorization: Bearer {token}" \
+      -d etiquette="Typescript"
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "da8fdaa3-f5e2-4568-94cb-d0c00286e2fb",
+        "label": "Typescript",
+        "color": "bg-red-200",
+        "created_at": "2023-02-05T19:24:56.293+01:00",
+        "updated_at": "2023-02-05T19:24:56.293+01:00"
+      }
+    ]
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Créer une question {{ tag: 'POST', label: '/v1/questions/create' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet d'ajouter une nouvelle questions. Une étiquette et un tableau de réponses est nécessaire pour la création de questions.
+
+    ### Required attributes
+
+    <Properties>
+      <Property name="label" type="string">
+        Le label de la question.
+      </Property>
+      <Property name="enonce" type="string">
+        L'énoncé de la question.
+      </Property>
+      <Property name="etiquettes" type="string[]">
+        Un tableau d'étiquettes.
+      </Property>
+      <Property name="reponses" type="reponse[]">
+        Un tableau de réponse.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="POST" label="/v1/questions/create">
+
+      ```bash {{ title: 'cURL' }}
+      curl https://api.reforged.fr/v1/questions/create \
+        -H "Authorization: Bearer {token}" \
+        -H "Content-Type: application/json" \
+        -X POST \
+        -d '{
+          "label": "Lorem Ipsum",
+          "enonce": "```ts const test: string = \"Hello reforged\"",
+          "type": "checkbox",
+          "etiquettes": [
+            "da8fdaa3-f5e2-4568-94cb-d0c00286e2fb"
+          ],
+          "reponses": [
+            {
+              "body": "Test 1",
+              "valide": false
+            },
+            {
+              "body": "Test 2",
+              "valide": false
+            },
+            {
+              "body": "Test 3",
+              "valide": true
+            }
+          ]
+        }'
+      ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "label": "Lorem Ipsum",
+      "enonce": "```ts const test: string = \"Hello Reforged\"",
+      "user_id": "c24b711f-b95a-4302-aa04-ae584e840efa",
+      "type": "checkbox",
+      "slug": "lorem-ipsum",
+      "id": "a9bb7b1e-71b7-4a4e-b017-4697abba06ae",
+      "created_at": "2023-02-05T19:25:09.347+01:00",
+      "updated_at": "2023-02-05T19:25:09.347+01:00",
+      "etiquettes": [
+        {
+          "id": "da8fdaa3-f5e2-4568-94cb-d0c00286e2fb",
+          "label": "Typescript",
+          "color": "bg-red-200",
+          "created_at": "2023-02-05T19:24:56.293+01:00",
+          "updated_at": "2023-02-05T19:24:56.293+01:00"
+        }
+      ],
+      "reponses": [
+        {
+          "id": "37dc2552-90a5-418d-a128-e5c03f19f99e",
+          "body": "Test 1",
+          "valide": false,
+          "question_id": "a9bb7b1e-71b7-4a4e-b017-4697abba06ae",
+          "created_at": "2023-02-05T19:25:09.355+01:00",
+          "updated_at": "2023-02-05T19:25:09.355+01:00"
+        },
+        {
+          "id": "7341eff2-d0c3-4b21-9d14-817871584e0d",
+          "body": "Test 3",
+          "valide": true,
+          "question_id": "a9bb7b1e-71b7-4a4e-b017-4697abba06ae",
+          "created_at": "2023-02-05T19:25:09.355+01:00",
+          "updated_at": "2023-02-05T19:25:09.355+01:00"
+        },
+        {
+          "id": "c2e841a6-7407-465d-a923-32648e1bf218",
+          "body": "Test 2",
+          "valide": false,
+          "question_id": "a9bb7b1e-71b7-4a4e-b017-4697abba06ae",
+          "created_at": "2023-02-05T19:25:09.355+01:00",
+          "updated_at": "2023-02-05T19:25:09.355+01:00"
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Récupérer une question {{ tag: 'GET', label: '/v1/questions/:id' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet de récupérer une question en fournissant l'identifiant de la question. Reportez-vous à [la liste](#le-modele-question) en haut de cette page pour voir quelles propriétés sont incluses dans les objets de question.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/v1/questions/xgQQXg3hrtjh7AvZ">
+
+    ```bash {{ title: 'cURL' }}
+    curl https://api.reforged.fr/v1/questions/xgQQXg3hrtjh7AvZ \
+      -H "Authorization: Bearer {token}" \
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "a9bb7b1e-71b7-4a4e-b017-4697abba06ae",
+      "label": "DIzaudiua",
+      "slug": "dizaudiua",
+      "enonce": "```ts const test: string = \"dazda\"",
+      "type": "checkbox",
+      "user_id": "c24b711f-b95a-4302-aa04-ae584e840efa",
+      "created_at": "2023-02-05T19:25:09.347+01:00",
+      "updated_at": "2023-02-05T19:25:09.347+01:00",
+      "reponses": [
+        // ...
+      ],
+      "etiquettes": [
+        // ...
+      ],
+      "user": {
+        "id": "c24b711f-b95a-4302-aa04-ae584e840efa",
+        "email": "nathael@gmail.com",
+        "ine": "1122334455",
+        "firstname": "Nathael",
+        "lastname": "Bonnal",
+        "remember_me_token": null,
+        "created_at": "2023-02-05T18:52:39.883+01:00",
+        "updated_at": "2023-02-05T18:52:39.883+01:00"
+      }
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Modifier une question {{ tag: 'PUT', label: '/v1/questions/:id' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet d'effectuer une mise à jour d'une question.
+
+    ### Required attributes
+
+    <Properties>
+      <Property name="etiquettes" type="string[]">
+        Un tableau d'étiquettes.
+      </Property>
+      <Property name="reponses" type="reponse[]">
+        Un tableau de réponse.
+      </Property>
+    </Properties>
+
+    ### Optional attributes
+
+    <Properties>
+      <Property name="label" type="string">
+        Le label de la question.
+      </Property>
+      <Property name="enonce" type="string">
+        L'énonce de la question.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="PUT" label="/v1/questions/xgQQXg3hrtjh7AvZ">
+
+    ```bash {{ title: 'cURL' }}
+    curl -X PUT https://api.reforged.fr/v1/questions/xgQQXg3hrtjh7AvZ \
+      -H "Authorization: Bearer {token}" \
+      -H "Content-Type: application/json"
+      -d '{
+        "label": "Test",
+        "etiquettes": [
+        "da8fdaa3-f5e2-4568-94cb-d0c00286e2fb"
+        ],
+        "reponses": [
+          {
+            "body": "Test 1",
+            "valide": false
+          },
+          {
+            "body": "Test 2",
+            "valide": false
+          },
+          {
+            "body": "Test 3",
+            "valide": true
+          }
+        ]
+      }'
+    ```
+
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "message": "Question modifiée",
+      "question": {
+        "id": "b644ff73-c480-4183-83bf-48f12947b328",
+        "label": "Test",
+        "slug": "test",
+        "enonce": "```ts const test: string = \"dazda\"",
+        "type": "checkbox",
+        "user_id": "c24b711f-b95a-4302-aa04-ae584e840efa",
+        "created_at": "2023-02-05T20:05:58.387+01:00",
+        "updated_at": "2023-02-05T20:06:06.700+01:00",
+        "etiquettes": [
+          //...
+        ],
+        "reponses": [
+          //...
+        ]
+      }
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Supprimer une question {{ tag: 'DELETE', label: '/v1/questions/:id' }}
+
+<Row>
+  <Col>
+
+    Ce point de terminaison vous permet de supprimer une question. Note : Cette opération supprime définitivement les réponses liés à ce dernier !
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="DELETE" label="/v1/questions/xgQQXg3hrtjh7AvZ">
+
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE https://api.protocol.chat/v1/questions/xgQQXg3hrtjh7AvZ \
+      -H "Authorization: Bearer {token}"
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "message": "Question supprimée",
+      "question": {
+        "id": "a9bb7b1e-71b7-4a4e-b017-4697abba06ae",
+        "label": "Lorem",
+        "slug": "lorem",
+        "enonce": "```ts const test: string = \"dazda\"",
+        "type": "checkbox",
+        "user_id": "c24b711f-b95a-4302-aa04-ae584e840efa",
+        "created_at": "2023-02-05T19:25:09.347+01:00",
+        "updated_at": "2023-02-05T19:25:09.347+01:00"
+      }
+    }
+    ```
+
+  </Col>
+</Row>
