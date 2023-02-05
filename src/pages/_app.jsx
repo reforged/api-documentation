@@ -24,9 +24,9 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         {router.pathname === '/' ? (
-          <title>ONU API Reference</title>
+          <title>Reforged API Reference</title>
         ) : (
-          <title>{`${pageProps.title} - Protocol API Reference`}</title>
+          <title>{`${pageProps.title} - Reforged API Reference`}</title>
         )}
         <meta name="description" content={pageProps.description} />
       </Head>
