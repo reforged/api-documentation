@@ -61,8 +61,9 @@ export const Header = forwardRef(function Header({ className }, ref) {
       <Search />
       <div className="flex items-center gap-5 lg:hidden">
         <MobileNavigation />
-        <Link href="/" aria-label="Home">
-          <Logo className="h-6" />
+        <Link href="/" aria-label="Home" className="flex gap-2 items-center">
+          <img className="h-8 w-8 object-cover rounded-md bg-zinc-800 p-1" src="https://cdn.discordapp.com/attachments/935833137349541918/1071833266841210961/branding.png" alt=""/>
+          <span className="text-gray-100 font-bold text-lg">Reforged</span>
         </Link>
       </div>
       <div className="flex items-center gap-5">

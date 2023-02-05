@@ -20,7 +20,7 @@ export function Layout({ children, sections = [] }) {
             <div className="hidden lg:flex">
               <Link href="/" aria-label="Home" className="flex gap-2 items-center">
                 <img className="h-12 w-12 object-cover rounded-md bg-zinc-800 p-1" src="https://cdn.discordapp.com/attachments/935833137349541918/1071833266841210961/branding.png" alt=""/>
-                <span className="text-gray-100 font-bold text-lg hidden">La Forge</span>
+                <span className="text-gray-100 font-bold text-lg">Reforged</span>
               </Link>
             </div>
             <Header />
