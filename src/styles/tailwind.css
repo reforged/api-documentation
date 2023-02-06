@@ -10,6 +10,10 @@
   --shiki-token-punctuation: theme('colors.zinc.200');
 }
 
+:root::-webkit-scrollbar {
+  display: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
