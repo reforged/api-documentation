@@ -1,6 +1,42 @@
 export const description =
-  'En cours de rédaction'
+  'Sur cette page, nous allons nous plonger dans les différents points de terminaison des utilisateurs'
 
 # Utilisateurs
+
+Les Utilisateurs sont des personnes qui pocede un compte et qui peuvent donc utiliser notre application. Sur cette page nous verront comment créer et modifier un compte.
+
+## Le modèle Utilisateurs
+
+Le modèle Utilisateurs contient toutes les informations relatives aux utilisateurs.C'est a dire l'email et le mot de passe pour n'en citer que quelque un. En outre, les Utilisateurs peuvent également être reliés aux questions et sequences qu'ils ont créé ainsi qu'a un roles et une permission.
+
+### Properties
+
+<Properties>
+  <Property name="id" type="string">
+    Identifiant unique d'un Utilisateur.
+  </Property>
+  <Property name="email" type="string">
+    Email unique d'un utilisateur.
+  </Property>
+  <Property name="firstname" type="string">
+    Prénom de l'utilisateur.
+  </Property>
+  <Property name="lastname" type="string">
+    Nom de l'utilisateur.
+  </Property>
+  <Property name="password" type="string">
+    mot de passe de l'utilisateur.
+  </Property>
+  <Property name="created_at" type="timestamp">
+    Date de la création de l'utilisateur'.
+  </Property>
+  <Property name="updated_at" type="timestamp">
+    Date de la dernière modification de l'utilisateur.
+  </Property>
+</Properties>
+
+---
+
+## Liste de toutes les Utilisateurs
 
 En cours de rédaction
