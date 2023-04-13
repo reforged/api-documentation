@@ -1,6 +1,36 @@
 export const description =
-  'En cours de rédaction'
+  'Sur cette page, nous allons nous plonger dans les différents points de terminaison des Roles que vous pouvez utiliser pour gérer les permissions de manière programmatique.'
 
 # Roles
+
+Les Roles sont un des éléments important lié aux utilisateurs.Ils permetent à un utilisateur d'acceder à certaines permissions et fonctionnalité.
+
+## Le modèle Roles
+
+Le modèle Roles contient toutes les informations relatives a un role.C'est a dire le nom et le niveau d'accès du role. En outre, les roles peuvent également être reliés aux Utilisateurs et permissions.
+
+### Properties
+
+<Properties>
+  <Property name="id" type="string">
+    Identifiant unique d'un role.
+  </Property>
+  <Property name="label" type="string">
+    Nom d'un role.
+  </Property>
+  <Property name="power" type="int">
+    niveau d'accés du role.
+  </Property>
+  <Property name="created_at" type="timestamp">
+    Date de la création du role'.
+  </Property>
+  <Property name="updated_at" type="timestamp">
+    Date de la dernière modification du role.
+  </Property>
+</Properties>
+
+---
+
+## Liste de toutes les Roles
 
 En cours de rédaction
