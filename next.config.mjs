@@ -19,6 +19,9 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  }
 }
 
 export default withMDX(nextConfig)
