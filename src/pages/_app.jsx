@@ -9,6 +9,7 @@ import { useMobileNavigationStore } from '@/components/MobileNavigation'
 import '@/styles/tailwind.css'
 import 'focus-visible'
 import LayoutHome from '@/components/home/LayoutHome'
+import {slugifyWithCounter} from "@sindresorhus/slugify";
 
 function onRouteChange() {
   useMobileNavigationStore.getState().close()
@@ -67,11 +68,7 @@ export default function App({ Component, pageProps }) {
    * Changement du path pour inclure le scope de la doc
    */
   if (router.pathname.startsWith('/')) {
-    let title = pageProps.markdoc?.frontmatter.title
-
-    let pageTitle =
-      pageProps.markdoc?.frontmatter.pageTitle ||
-      `${pageProps.markdoc?.frontmatter.title} - Docs`
+    let title = pageProps.title
 
     let description = pageProps.markdoc?.frontmatter.description
 
@@ -85,12 +82,12 @@ export default function App({ Component, pageProps }) {
           {router.pathname === '/' ? (
             <title>Reforged API Reference</title>
           ) : (
-            <title>{pageTitle}</title>
+            <title>{`${title} - Reforged API Reference`}</title>
           )}
           {description && <meta name="description" content={description} />}
         </Head>
-        <MDXProvider components={mdxComponents}>
-          <Layout {...pageProps} tableOfContents={tableOfContents}>
+        <MDXProvider components={mdxComponents} tableOfContents={tableOfContents}>
+          <Layout {...pageProps}>
             <Component {...pageProps} />
           </Layout>
         </MDXProvider>
