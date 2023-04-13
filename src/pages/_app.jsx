@@ -8,6 +8,7 @@ import { useMobileNavigationStore } from '@/components/MobileNavigation'
 
 import '@/styles/tailwind.css'
 import 'focus-visible'
+import LayoutHome from '@/components/home/LayoutHome'
 
 function onRouteChange() {
   useMobileNavigationStore.getState().close()
